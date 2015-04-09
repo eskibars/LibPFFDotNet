@@ -18,12 +18,9 @@ license, except where explicitly noted.
     for the specific language governing rights and limitations under the
     License.
 
-    The Original Code is collusion.
+    The Initial Developer of this software is Shane Connelly (shane@eskibars.com)
 
-    The Initial Developer of the Original Code is the Mozilla Foundation.
-
-    Portions created by the Initial Developer are Copyright (C) 2010
-    the Initial Developer. All Rights Reserved.
+    All Rights Reserved.
 
     Contributor(s):
 
