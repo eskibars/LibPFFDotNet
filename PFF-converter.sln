@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFF-converter", "ODT-converter\PFF-converter.csproj", "{85BAA736-4E8C-402A-9493-D7B3D49C2BF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFF-converter", "PFF-converter\PFF-converter.csproj", "{85BAA736-4E8C-402A-9493-D7B3D49C2BF9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibPFFDotNet", "LibPFFDotNet\LibPFFDotNet.csproj", "{6B4191F2-AA72-4C5E-A818-D4434F2E1BD7}"
 EndProject
