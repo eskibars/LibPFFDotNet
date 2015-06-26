@@ -88,7 +88,7 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.Filter = "OST Files (*.ost)|*.ost";
+            this.openFileDialog1.Filter = "OST Files (*.ost)|*.ost|PST Files (*.pst)|*.pst";
             // 
             // lblPFFVersion
             // 
@@ -196,6 +196,10 @@
             // 
             // splitContainer1
             // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.BackColor = System.Drawing.Color.LightGray;
             this.splitContainer1.Location = new System.Drawing.Point(7, 6);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -206,20 +210,21 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.browser);
-            this.splitContainer1.Size = new System.Drawing.Size(832, 438);
+            this.splitContainer1.Size = new System.Drawing.Size(832, 395);
             this.splitContainer1.SplitterDistance = 277;
             this.splitContainer1.TabIndex = 2;
             // 
             // treeFolder
             // 
-            this.treeFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.treeFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.treeFolder.ImageIndex = 2;
             this.treeFolder.ImageList = this.icons;
-            this.treeFolder.Location = new System.Drawing.Point(3, 3);
+            this.treeFolder.Location = new System.Drawing.Point(0, 0);
             this.treeFolder.Name = "treeFolder";
             this.treeFolder.SelectedImageIndex = 2;
-            this.treeFolder.Size = new System.Drawing.Size(271, 392);
+            this.treeFolder.Size = new System.Drawing.Size(274, 395);
             this.treeFolder.TabIndex = 0;
             this.treeFolder.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeFolder_AfterSelect);
             // 
@@ -229,15 +234,16 @@
             this.browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.browser.Location = new System.Drawing.Point(3, 3);
+            this.browser.Location = new System.Drawing.Point(3, 0);
             this.browser.MinimumSize = new System.Drawing.Size(20, 20);
             this.browser.Name = "browser";
-            this.browser.Size = new System.Drawing.Size(545, 392);
+            this.browser.Size = new System.Drawing.Size(545, 395);
             this.browser.TabIndex = 1;
             this.browser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.browser_DocumentCompleted);
             // 
             // cmdExport
             // 
+            this.cmdExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmdExport.Location = new System.Drawing.Point(12, 563);
             this.cmdExport.Name = "cmdExport";
             this.cmdExport.Size = new System.Drawing.Size(178, 49);

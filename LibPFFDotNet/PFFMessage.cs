@@ -232,7 +232,10 @@ namespace LibPFFDotNet
         public override string GetName()
         {
             string r = GetMapiStringValue(mapi.EntryTypes.MessageSubject);
-            r = Regex.Replace(r, "^[\\x00-\\x32]*", "");
+            if (r != null)
+                r = Regex.Replace(r, "^[\\x00-\\x32]*", "");
+            else
+                r = "";
             return r;
         }
 

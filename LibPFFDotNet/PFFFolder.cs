@@ -44,6 +44,10 @@ namespace LibPFFDotNet
             return Folders;
         }
 
+        /// <summary>
+        /// Exports the current PFFFolder object to a given directory (as well as all folders and objects underneath it, recursively)
+        /// </summary>
+        /// <param name="BaseDirectory">The base directory to dump files to.  The directory must already exist.</param>
         public void Export(string BaseDirectory)
         {
             if (Directory.Exists(BaseDirectory))
@@ -80,6 +84,10 @@ namespace LibPFFDotNet
             return (FolderType)(GetMapiIntegerValue(mapi.EntryTypes.FolderType));
         }
 
+        /// <summary>
+        /// Gets a list of messages contained within this PFFFolder object
+        /// </summary>
+        /// <returns>A list of PFFMessage objects beneath the current PFFFolder object.  Note that this list is NOT a recursive list, but only the ones contained directly in the given folder</returns>
         public List<PFFMessage> GetSubmessages()
         {
             List<PFFMessage> Messages = new List<PFFMessage>();

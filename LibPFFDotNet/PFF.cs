@@ -38,6 +38,9 @@ namespace LibPFFDotNet
         }
     }
 
+    /// <summary>
+    /// Class is used to interact with PFF files and should be the entry point for any downstream PFF classes
+    /// </summary>
     public class PFF
     {
         public enum AccessFlags : int { Read = 1, Write = 2 };
@@ -52,6 +55,9 @@ namespace LibPFFDotNet
         int _Codepage = -1, _NumberOfOrphanItems = 0, _NumberOfRecoveredItems = 0;
         string _FileName;
 
+        /// <summary>
+        /// Loads the details of the PFF file into this PFF object
+        /// </summary>
         public void LoadFileDetails()
         {
             IntPtr ErrorMessage = new IntPtr();
@@ -87,6 +93,10 @@ namespace LibPFFDotNet
             }
         }
 
+        /// <summary>
+        /// Converts the opened PFF file to a string representation
+        /// </summary>
+        /// <returns>A string containing the details of the PFF file</returns>
         public override string ToString()
         {
             if (_Opened)
@@ -117,6 +127,10 @@ namespace LibPFFDotNet
             else return "";
         }
 
+        /// <summary>
+        /// Gets the root item of the opened PFF file
+        /// </summary>
+        /// <returns>>A PFFItem object pointing to the root item</returns>
         public PFFItem GetRootItem()
         {
             if (_Opened)
@@ -132,6 +146,10 @@ namespace LibPFFDotNet
                 throw new PFFFileDataError("File is not opened");
         }
 
+        /// <summary>
+        /// Gets the root folder of the opened PFF file
+        /// </summary>
+        /// <returns>A PFFFolder object pointing to the root folder</returns>
         public PFFFolder GetRootFolder()
         {
             if (_Opened)
@@ -147,6 +165,10 @@ namespace LibPFFDotNet
                 throw new PFFFileDataError("File is not opened");
         }
 
+        /// <summary>
+        /// Opens a PFF file at a given location and loads it into this object
+        /// </summary>
+        /// <param name="FilePath">The location of the PFF (.ost/.pst) file to open</param>
         public void Open(string FilePath)
         {
             IntPtr ErrorMessage;
@@ -180,6 +202,9 @@ namespace LibPFFDotNet
             int r = libpff.FreeFile(PFFHandler, out ErrorMessage);*/
         }
 
+        /// <summary>
+        /// Closes the PFF file and frees memory.
+        /// </summary>
         public void Close()
         {
             IntPtr ErrorMessage;

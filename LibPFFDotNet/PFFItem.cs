@@ -14,6 +14,9 @@ namespace LibPFFDotNet
         }
     }
 
+    /// <summary>
+    /// This is the parent class for all major PFF items.  Folders, message, attachments, and recipients are all PFF items, to name a few.  See PFFItem.ItemTypes for a full list.
+    /// </summary>
     public class PFFItem
     {
         protected IntPtr _ItemHandler;
@@ -21,34 +24,97 @@ namespace LibPFFDotNet
         public enum ItemTypes : uint
         {
             Undefined,
-            Activity, // IPM.Activity
-            Appointment, // IPM.Appointment
+            /// <summary>
+            /// IPM.activity
+            /// </summary>
+            Activity,
+            /// <summary>
+            /// IPM.Appointment
+            /// </summary>
+            Appointment,
             Attachment,
             Attachments,
-            Common, // IPM
-            Configuration, // IPM.Configuration.*
-            ConflictMessage, // IPM.Conflict.Message
-            Contact, // IPM.Contact
-            DistributionList, // IPM.DistList
-            Document, // IPM.Document.*
-            Email, // IPM.Note, REPORT.IPM.Note
-            EmailSMIME, // IPM.Note.SMIME
-            Fax, // IPM.FAX, IPM.Note.Fax
+            /// <summary>
+            /// IPM
+            /// </summary>
+            Common,
+            /// <summary>
+            /// All classes in IPM.Configuration.*
+            /// </summary>
+            Configuration,
+            /// <summary>
+            /// IPM.Conflict.Message
+            /// </summary>
+            ConflictMessage,
+            /// <summary>
+            /// IPM.Contact
+            /// </summary>
+            Contact,
+            /// <summary>
+            /// IPM.DistList
+            /// </summary>
+            DistributionList,
+            /// <summary>
+            /// All classes in IPM.Document.*
+            /// </summary>
+            Document,
+            /// <summary>
+            /// IPM.Note or REPORT.IPM.Note
+            /// </summary>
+            Email,
+            /// <summary>
+            /// IPM.Note.SMIME, IPM.Note.SMIME.MultipartSigned
+            /// </summary>
+            EmailSMIME,
+            /// <summary>
+            /// IPM.FAX or IPM.Note.Fax
+            /// </summary>
+            Fax,
             Folder,
-            Meeting, // IPM.Schedule.Meeting
-            MMS, // IPM.Note.Mobile.MMS
-            StickyNote, // IPM.StickyNote
-            PostingNote, // IPM.Post
+            /// <summary>
+            /// IPM.Schedule.Meeting
+            /// </summary>
+            Meeting,
+            /// <summary>
+            /// IPM.Note.Mobile.MMS
+            /// </summary>
+            MMS,
+            /// <summary>
+            /// IPM.StickyNote
+            /// </summary>
+            StickyNote,
+            /// <summary>
+            /// IPM.Post
+            /// </summary>
+            PostingNote,
             Recipients,
-            RSSFeed, // IPM.Post.RSS
-            Sharing, // IPM.Sharing.*
-            SMS, // IPM.SMS
+            /// <summary>
+            /// IPM.Post.RSS
+            /// </summary>
+            RSSFeed,
+            /// <summary>
+            /// All classes in IPM.Sharing.*
+            /// </summary>
+            Sharing,
+            /// <summary>
+            /// IPM.SMS
+            /// </summary>
+            SMS,
             AssociatedContents,
             Subfolders,
             Submessages,
-            Task, // IPM.Task
-            TaskRequest, // IPM.TaskRequest.* (including IPM.TaskRequest.Accept and IPM.TaskRequest.Decline)
-            Voicemail, // IPM.Note.Voicemail
+            /// <summary>
+            /// IPM.Task
+            /// </summary>
+            Task,
+            /// <summary>
+            /// All classes in IPM.TaskRequest.* (including IPM.TaskRequest.Accept and IPM.TaskRequest.Decline)
+            /// </summary>
+            TaskRequest,
+            /// <summary>
+            /// IPM.Note.Voicemail
+            /// </summary>
+            Voicemail,
             Unknown
         };
 

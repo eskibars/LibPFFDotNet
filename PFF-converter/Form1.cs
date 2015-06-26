@@ -122,7 +122,7 @@ namespace PFF_converter
                     src = src.Substring(4);
                     foreach (PFFAttachment attach in ViewingMessage.GetAttachments())
                     {
-                        if (attach.GetContentID().Equals(src))
+                        if (src.Equals(attach.GetContentID()))
                         {
                             string data = Convert.ToBase64String(attach.GetContents());
                             string newsrc = "data:" + attach.GetMimeType() + ";base64," + data;
@@ -188,15 +188,25 @@ namespace PFF_converter
                 {
                     // in the item browsing view -- export the single item
                     TreeNode n = treeFolder.SelectedNode;
-                    PFFMessage m = (PFFMessage)n.Tag;
-                    switch (m.GetItemType())
+                    if (n.Level == 0)
                     {
-                        case PFFItem.ItemTypes.Email:
-                            SmtpClient Client = new SmtpClient("empty");
-                            Client.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-                            Client.PickupDirectoryLocation = outputDir;
-                            Client.Send(m.GetAsMailMessage());
-                            break;
+                        // this is a standard message
+                        PFFMessage m = (PFFMessage)n.Tag;
+                        switch (m.GetItemType())
+                        {
+                            case PFFItem.ItemTypes.Email:
+                                SmtpClient Client = new SmtpClient("empty");
+                                Client.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
+                                Client.PickupDirectoryLocation = outputDir;
+                                Client.Send(m.GetAsMailMessage());
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        // this is an attachment
+                        PFFAttachment a = (PFFAttachment)n.Tag;
+                        a.SaveContents(Path.Combine(outputDir, a.GetName()));
                     }
                 }
             }
