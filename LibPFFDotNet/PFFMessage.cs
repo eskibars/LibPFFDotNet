@@ -224,6 +224,7 @@ namespace LibPFFDotNet
             foreach (PFFAttachment pa in GetAttachments())
             {
                 Attachment a = new Attachment(new PFFAttachmentStream(pa.Handler), pa.GetName(), pa.GetMimeType());
+                m.Attachments.Add(a);
             }
             
             return m;
