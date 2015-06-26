@@ -1,8 +1,60 @@
 ## LibPFFDotNet
-A .NET library to use the libpff project along with a sample application to do .eml exports from a PFF file (OST, PST)
+A .NET library to use the [libpff](https://github.com/libyal/libpff) project along with a sample application to preview the e-mails and export a PFF file (OST, PST) to .eml files on disk.
+
+## Importing and Compilation
+1. Download [libpff](https://github.com/libyal/libpff) and compile.  Alternatively, I have uploaded versions which I have compiled for Windows here: [64-bit](https://drive.google.com/file/d/0B0B_HvrE-vjRZzY2SjRNUWJCTGs/view?usp=sharing) or [32-bit](https://drive.google.com/file/d/0B0B_HvrE-vjRQ0E4M1pOc21uMGs/view?usp=sharing)
+2. Create your project or open the PFF-converter project, depending on what you want to do
+3. Drag and drop the compiled .dlls (libpff.dll and zlib.dll if you built in Visual Studio) to copy them into the project
+4. In Visual Studio, set the "Copy to Output Directory" property for each of the .dlls in the project to "Copy always"
+
+If you're simply compiling the existing project, you are now done and can compile at this stage.
+
+If you're adding LibPFFDotNet to your own project, do the above steps and then:
+
+1. Add the "LibPFFDotNet" project into your solution by going to File->Add->Existing Project
+2. Add a reference to LibPFFDotNet to your own project by going to Project->Add Reference and then selecting "LibPFFDoNet" from the Solution->Projects tab
+3. In any lass that you want to use LibPFFDotNet, it's unsurprisingly held in the namespace "LibPFFDotNet", which you'll need to either imporing using "using LibPFFDotNet" or making specific references to the sub-classes
+
+You should now be able to compile your project
+
+## Sample
+The general process to open and use a PFF (.ost or .pst) file is as follows:
+
+    PFF pFile = new PFF();
+    pFile.Open(@"C:\myfile.ost");
+    PFFFolder pFolder = pFile.GetRootFolder();
+    List<PFFFolder> pSubfolders = pFolder.GetSubfolders();
+    for (int i = 0; i < pSubfolders.Count; i++)
+    {
+        string folderName = string name = pSubfolders[i].GetName();
+        // do something intelligent here...  for example, you can recurse by accessing pSubfolders[i].GetSubfolders()
+    }
+    pFolder.Export(@"C:\export"); // export all folders and messages recursively
+    
+    List<PFFMessage> pMessages = pFolder.GetSubmessages(); // in reality, this particular folder probably won't contain anything, simply because the root folder is unlikely to house data... but let's suppose it does...
+    PFFMessage pFirstMessage = pMessages[0];
+    
+    string htmlMessage = pFirstMessage.GetBody(PFFMessage.BodyType.HTML);
+    /*
+     * Two notes: 
+     * 1) There are a few types to choose from.. text, HTML, and RTF.  Not every message will have all 3.  Right now, nothing intelligent is done to return a non-preferred type
+     * 2) The HTML body will attempt to render images in the message by converting them to base64 objects and replacing the image content ID source (<img src="cid:..." ...>) with a data source (<img src="data:image/..." ...>)
+    */
+    List<PFFAttachment> pAttachments = pFirstMessage.GetAttachments();
+    PFFRecipients pRecipients = pFirstMessage.GetRecipients();
+
+## Limitations
+Lots of limitations right now...
+
+1. Only exports mail messages, attachments, and folder structures.  For example, it doesn't export calendar items (as .ics, for example) or people (as v-cards, for example)
+2. Only exports mail messages in .eml (no .msg or bulk export to .pst or .mbox, for example)
+3. Doesn't handle e-mail address lookups when the mail format is in Directory Name format
+4. Doesn't deal with distribution lists whatsoever
+5. Lacking in documentation.  Hopefully the samples provide a good start
+6. I'm sure many bugs :) (Also, lacking in test harnesses)
+7. Others, I'm sure.  Please let me know in the issues!
 
 ## LICENSE
-
 All files that are part of this project are covered by the following
 license, except where explicitly noted.
 
