@@ -224,7 +224,7 @@
             this.treeFolder.Location = new System.Drawing.Point(0, 0);
             this.treeFolder.Name = "treeFolder";
             this.treeFolder.SelectedImageIndex = 2;
-            this.treeFolder.Size = new System.Drawing.Size(274, 395);
+            this.treeFolder.Size = new System.Drawing.Size(278, 392);
             this.treeFolder.TabIndex = 0;
             this.treeFolder.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeFolder_AfterSelect);
             // 
@@ -237,7 +237,7 @@
             this.browser.Location = new System.Drawing.Point(3, 0);
             this.browser.MinimumSize = new System.Drawing.Size(20, 20);
             this.browser.Name = "browser";
-            this.browser.Size = new System.Drawing.Size(545, 395);
+            this.browser.Size = new System.Drawing.Size(545, 392);
             this.browser.TabIndex = 1;
             this.browser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.browser_DocumentCompleted);
             // 

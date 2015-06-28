@@ -160,7 +160,8 @@ namespace LibPFFDotNet
 
         public override string GetName()
         {
-            return GetMapiStringValue(mapi.EntryTypes.AttachmentFilenameLong);
+            string attachName = GetMapiStringValue(mapi.EntryTypes.AttachmentFilenameLong);
+            return attachName;
         }
 
         public string GetMimeType()
@@ -213,35 +214,46 @@ namespace LibPFFDotNet
             return fs.ToArray();
         }
 
-        unsafe public void SaveContents(string FilePath)
+        unsafe public bool SaveContents(string FilePath, bool OverwriteExisting = false)
         {
-            FileStream fs = new FileStream(FilePath, FileMode.CreateNew);
-            UInt64 buffersize = 1024;
-            UInt64 filesize = GetSize();
-            UInt64 offset = 0;
-            Int64 or = Seek(0, SeekStyle.SetOffset);
-            if (or != -1)
+            try
             {
-                while (offset < filesize)
+                FileStream fs;
+                if (OverwriteExisting)
+                    fs = new FileStream(FilePath, FileMode.Create);
+                fs = new FileStream(FilePath, FileMode.CreateNew);
+                UInt64 buffersize = 1024;
+                UInt64 filesize = GetSize();
+                UInt64 offset = 0;
+                Int64 or = Seek(0, SeekStyle.SetOffset);
+                if (or != -1)
                 {
-                    UInt64 readsize = buffersize;
-                    if (offset + buffersize >= filesize)
-                        readsize = filesize - offset;
-                    IntPtr ErrorMessage = new IntPtr();
-                    UIntPtr s = new UIntPtr(readsize);
-                    byte[] buffer = new byte[readsize];
-                    fixed (byte* p = buffer)
+                    while (offset < filesize)
                     {
-                        IntPtr DataValue = (IntPtr)p;
-                        int r = libpff.GetAttachmentData(_ItemHandler, DataValue, s, out ErrorMessage).ToInt32();
-                        if (r == -1)
-                            throw new PFFAttachmentDataError("Error getting attachment data: " + libpff.GetErrorsFromIntPtr(ErrorMessage)[0]);
-                        fs.Write(buffer, 0, r);
+                        UInt64 readsize = buffersize;
+                        if (offset + buffersize >= filesize)
+                            readsize = filesize - offset;
+                        IntPtr ErrorMessage = new IntPtr();
+                        UIntPtr s = new UIntPtr(readsize);
+                        byte[] buffer = new byte[readsize];
+                        fixed (byte* p = buffer)
+                        {
+                            IntPtr DataValue = (IntPtr)p;
+                            int r = libpff.GetAttachmentData(_ItemHandler, DataValue, s, out ErrorMessage).ToInt32();
+                            if (r == -1)
+                                throw new PFFAttachmentDataError("Error getting attachment data: " + libpff.GetErrorsFromIntPtr(ErrorMessage)[0]);
+                            fs.Write(buffer, 0, r);
+                        }
+                        offset += readsize;
                     }
-                    offset += readsize;
                 }
+                fs.Close();
+                return true;
             }
-            fs.Close();
+            catch (IOException e)
+            {
+                return false;
+            }
         }
 
         public UInt64 GetSize()

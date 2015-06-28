@@ -105,6 +105,7 @@ namespace LibPFFDotNet
             AttachmentFilenameShort = 0x3704,
             AttachmentFilenameLong = 0x3707,
             AttachmentMimeType = 0x370e,
+            AttachmentTransportName = 0x370c,
 
             AttachmentConentID = 0x3712,
             AttachmentContentLocation = 0x3713,

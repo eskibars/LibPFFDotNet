@@ -110,6 +110,10 @@ namespace PFF_converter
                 }
                 sf.GetRecipients();
             }
+            else
+            {
+                browser.DocumentText = "Cannot preview attachments";
+            }
         }
 
         private void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -156,6 +160,8 @@ namespace PFF_converter
                 for (int j = 0; j < a.Count; j++)
                 {
                     string an = a[j].GetName();
+                    if (an == null || "".Equals("an"))
+                        an = "unnamed_attachment.___";
                     TreeNode tan = new TreeNode();
                     tan.Text = an;
                     tan.Tag = a[j];
